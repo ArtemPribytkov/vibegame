@@ -1,0 +1,373 @@
+[gd_scene load_steps=18 format=3 uid="uid://e2m8k5p3v7x9d"]
+
+[ext_resource type="Script" path="res://scripts/world/game_world.gd" id="1_game_world"]
+[ext_resource type="PackedScene" uid="uid://b7k4x9m2p5v1c" path="res://scenes/entities/player.tscn" id="2_player_scene"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bonfire.svg" id="3_bonfire_tex"]
+[ext_resource type="Texture2D" path="res://assets/ui/dark_sigil.svg" id="4_sigil_tex"]
+
+[sub_resource type="Gradient" id="Gradient_embers"]
+offsets = PackedFloat32Array(0, 0.25, 0.7, 1)
+colors = PackedColorArray(1, 0.8, 0.35, 0, 1, 0.5, 0.12, 0.9, 0.75, 0.2, 0.05, 0.6, 0.2, 0.05, 0.02, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(3800, 240)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_left_wall"]
+size = Vector2(80, 700)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_right_wall"]
+size = Vector2(80, 700)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_1"]
+size = Vector2(240, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_2"]
+size = Vector2(300, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_3"]
+size = Vector2(260, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_altar"]
+size = Vector2(380, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bonfire_zone"]
+size = Vector2(110, 90)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_bg"]
+bg_color = Color(0.06, 0.05, 0.05, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.48, 0.38, 0.24, 0.9)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_fill"]
+bg_color = Color(0.62, 0.14, 0.12, 1)
+border_width_top = 1
+border_color = Color(0.85, 0.32, 0.26, 0.7)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_stam_fill"]
+bg_color = Color(0.18, 0.46, 0.24, 1)
+border_width_top = 1
+border_color = Color(0.36, 0.72, 0.42, 0.7)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_banner"]
+bg_color = Color(0.03, 0.025, 0.025, 0.82)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.65, 0.5, 0.28, 0.75)
+content_margin_top = 14.0
+content_margin_bottom = 14.0
+
+[node name="GameWorld" type="Node2D"]
+script = ExtResource("1_game_world")
+
+[node name="SkyCanvas" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="AbyssSky" type="ColorRect" parent="SkyCanvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.04, 0.035, 0.045, 1)
+
+[node name="HorizonFog" type="ColorRect" parent="SkyCanvas"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -280.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.12, 0.07, 0.06, 0.35)
+
+[node name="EclipseMoon" type="TextureRect" parent="SkyCanvas"]
+modulate = Color(1, 0.85, 0.7, 0.38)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -280.0
+offset_top = 48.0
+offset_right = -120.0
+offset_bottom = 208.0
+grow_horizontal = 0
+texture = ExtResource("4_sigil_tex")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BackgroundRuins" type="Node2D" parent="."]
+z_index = -4
+
+[node name="Pillar1" type="ColorRect" parent="BackgroundRuins"]
+offset_left = -220.0
+offset_top = -340.0
+offset_right = -170.0
+offset_bottom = 0.0
+color = Color(0.075, 0.065, 0.07, 1)
+
+[node name="Pillar2" type="ColorRect" parent="BackgroundRuins"]
+offset_left = 240.0
+offset_top = -420.0
+offset_right = 300.0
+offset_bottom = 0.0
+color = Color(0.07, 0.06, 0.065, 1)
+
+[node name="Pillar3" type="ColorRect" parent="BackgroundRuins"]
+offset_left = 720.0
+offset_top = -380.0
+offset_right = 775.0
+offset_bottom = 0.0
+color = Color(0.075, 0.065, 0.07, 1)
+
+[node name="Pillar4" type="ColorRect" parent="BackgroundRuins"]
+offset_left = 1320.0
+offset_top = -460.0
+offset_right = 1390.0
+offset_bottom = 0.0
+color = Color(0.07, 0.06, 0.065, 1)
+
+[node name="Pillar5" type="ColorRect" parent="BackgroundRuins"]
+offset_left = 1950.0
+offset_top = -390.0
+offset_right = 2010.0
+offset_bottom = 0.0
+color = Color(0.075, 0.065, 0.07, 1)
+
+[node name="WorldTerrain" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="MainGroundCollision" type="CollisionShape2D" parent="WorldTerrain"]
+position = Vector2(1400, 120)
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="GroundStoneTop" type="ColorRect" parent="WorldTerrain"]
+offset_left = -500.0
+offset_top = 0.0
+offset_right = 3300.0
+offset_bottom = 14.0
+color = Color(0.24, 0.2, 0.18, 1)
+
+[node name="GroundDeepEarth" type="ColorRect" parent="WorldTerrain"]
+offset_left = -500.0
+offset_top = 14.0
+offset_right = 3300.0
+offset_bottom = 300.0
+color = Color(0.09, 0.075, 0.07, 1)
+
+[node name="LeftWallCollision" type="CollisionShape2D" parent="WorldTerrain"]
+position = Vector2(-440, -300)
+shape = SubResource("RectangleShape2D_left_wall")
+
+[node name="LeftWallVisual" type="ColorRect" parent="WorldTerrain"]
+offset_left = -500.0
+offset_top = -650.0
+offset_right = -400.0
+offset_bottom = 20.0
+color = Color(0.12, 0.1, 0.095, 1)
+
+[node name="RightWallCollision" type="CollisionShape2D" parent="WorldTerrain"]
+position = Vector2(3160, -300)
+shape = SubResource("RectangleShape2D_right_wall")
+
+[node name="RightWallVisual" type="ColorRect" parent="WorldTerrain"]
+offset_left = 3120.0
+offset_top = -650.0
+offset_right = 3240.0
+offset_bottom = 20.0
+color = Color(0.12, 0.1, 0.095, 1)
+
+[node name="Platform1Collision" type="CollisionShape2D" parent="WorldTerrain"]
+position = Vector2(460, -95)
+shape = SubResource("RectangleShape2D_plat_1")
+
+[node name="Platform1Visual" type="ColorRect" parent="WorldTerrain"]
+offset_left = 340.0
+offset_top = -109.0
+offset_right = 580.0
+offset_bottom = -81.0
+color = Color(0.22, 0.18, 0.16, 1)
+
+[node name="Platform2Collision" type="CollisionShape2D" parent="WorldTerrain"]
+position = Vector2(840, -185)
+shape = SubResource("RectangleShape2D_plat_2")
+
+[node name="Platform2Visual" type="ColorRect" parent="WorldTerrain"]
+offset_left = 690.0
+offset_top = -199.0
+offset_right = 990.0
+offset_bottom = -171.0
+color = Color(0.22, 0.18, 0.16, 1)
+
+[node name="Platform3Collision" type="CollisionShape2D" parent="WorldTerrain"]
+position = Vector2(1240, -115)
+shape = SubResource("RectangleShape2D_plat_3")
+
+[node name="Platform3Visual" type="ColorRect" parent="WorldTerrain"]
+offset_left = 1110.0
+offset_top = -129.0
+offset_right = 1370.0
+offset_bottom = -101.0
+color = Color(0.22, 0.18, 0.16, 1)
+
+[node name="AltarStepsCollision" type="CollisionShape2D" parent="WorldTerrain"]
+position = Vector2(1760, -32)
+shape = SubResource("RectangleShape2D_altar")
+
+[node name="AltarStepsVisual" type="ColorRect" parent="WorldTerrain"]
+offset_left = 1570.0
+offset_top = -64.0
+offset_right = 1950.0
+offset_bottom = 0.0
+color = Color(0.19, 0.16, 0.14, 1)
+
+[node name="BonfireArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(130, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BonfireArea"]
+position = Vector2(0, -40)
+shape = SubResource("RectangleShape2D_bonfire_zone")
+
+[node name="BonfireSprite" type="Sprite2D" parent="BonfireArea"]
+position = Vector2(0, -36)
+texture = ExtResource("3_bonfire_tex")
+
+[node name="BonfireEmbers" type="CPUParticles2D" parent="BonfireArea"]
+position = Vector2(0, -24)
+amount = 28
+lifetime = 2.2
+preprocess = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(16, 6)
+direction = Vector2(0, -1)
+spread = 25.0
+gravity = Vector2(4, -38)
+initial_velocity_min = 18.0
+initial_velocity_max = 42.0
+scale_amount_min = 2.0
+scale_amount_max = 3.5
+color_ramp = SubResource("Gradient_embers")
+
+[node name="BonfirePrompt" type="Label" parent="BonfireArea"]
+unique_name_in_owner = true
+offset_left = -110.0
+offset_top = -108.0
+offset_right = 110.0
+offset_bottom = -82.0
+theme_override_colors/font_color = Color(0.95, 0.82, 0.55, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.95)
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 14
+text = "[E] Отдохнуть у костра"
+horizontal_alignment = 1
+
+[node name="Player" parent="." instance=ExtResource("2_player_scene")]
+unique_name_in_owner = true
+position = Vector2(0, -2)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="TopLeftStats" type="HBoxContainer" parent="HUD"]
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 380.0
+offset_bottom = 76.0
+theme_override_constants/separation = 12
+
+[node name="CrestIcon" type="TextureRect" parent="HUD/TopLeftStats"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 2
+texture = ExtResource("4_sigil_tex")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BarsVBox" type="VBoxContainer" parent="HUD/TopLeftStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+theme_override_constants/separation = 6
+
+[node name="HpBar" type="ProgressBar" parent="HUD/TopLeftStats/BarsVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 16)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hp_fill")
+value = 100.0
+show_percentage = false
+
+[node name="StaminaBar" type="ProgressBar" parent="HUD/TopLeftStats/BarsVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 12)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_stam_fill")
+value = 100.0
+show_percentage = false
+
+[node name="SlashStyleLabel" type="Label" parent="HUD/TopLeftStats/BarsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.88, 0.76, 0.52, 0.95)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 13
+text = "Стиль клинка: 1: Огненный взмах"
+
+[node name="BannerContainer" type="PanelContainer" parent="HUD"]
+unique_name_in_owner = true
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -120.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_banner")
+
+[node name="VBox" type="VBoxContainer" parent="HUD/BannerContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BannerLabel" type="Label" parent="HUD/BannerContainer/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.88, 0.76, 0.48, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.95)
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 32
+text = "ПЕПЕЛЬНЫЙ ПРЕДЕЛ"
+horizontal_alignment = 1
+
+[node name="BannerSubLabel" type="Label" parent="HUD/BannerContainer/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68, 0.62, 0.54, 1)
+theme_override_font_sizes/font_size = 14
+text = "Начало пути"
+horizontal_alignment = 1
+
+[node name="ControlsHint" type="Label" parent="HUD"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -34.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.62, 0.56, 0.48, 0.85)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 14
+text = "A / D — шаг  |  S — присесть  |  Пробел — прыжок  |  Shift — перекат  |  ЛКМ / J — удар  |  1–6 — стиль удара  |  E — костёр  |  Esc — меню"
+horizontal_alignment = 1

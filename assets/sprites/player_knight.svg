@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 80" width="64" height="80">
+  <defs>
+    <linearGradient id="armor" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9da3ab"/>
+      <stop offset="50%" stop-color="#5a6069"/>
+      <stop offset="100%" stop-color="#2c3036"/>
+    </linearGradient>
+    <linearGradient id="cloak" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4f1818"/>
+      <stop offset="100%" stop-color="#1f0909"/>
+    </linearGradient>
+  </defs>
+  <!-- Tattered Cloak behind -->
+  <path d="M22 24 L10 68 L18 64 L24 70 L32 65 L36 26 Z" fill="url(#cloak)" stroke="#140606" stroke-width="1.5"/>
+  <!-- Legs / Greaves -->
+  <rect x="23" y="54" width="7" height="22" rx="2" fill="#3a3f47" stroke="#181a1d" stroke-width="1.5"/>
+  <rect x="34" y="54" width="7" height="22" rx="2" fill="#494f59" stroke="#181a1d" stroke-width="1.5"/>
+  <!-- Boots -->
+  <path d="M22 72 L32 72 L33 77 L21 77 Z" fill="#25282c" stroke="#121316" stroke-width="1.2"/>
+  <path d="M33 72 L44 72 L46 77 L33 77 Z" fill="#2f3338" stroke="#121316" stroke-width="1.2"/>
+  <!-- Torso Cuirass & Tabard -->
+  <rect x="21" y="25" width="22" height="30" rx="3" fill="url(#armor)" stroke="#181a1d" stroke-width="1.5"/>
+  <path d="M26 36 L38 36 L36 58 L32 62 L28 58 Z" fill="#631d1d" stroke="#240b0b" stroke-width="1.2"/>
+  <!-- Belt -->
+  <rect x="20" y="45" width="24" height="4" fill="#3d2b1c" stroke="#1a120b" stroke-width="1"/>
+  <rect x="30" y="44" width="5" height="6" fill="#9c7a44" stroke="#1a120b" stroke-width="1"/>
+  <!-- Pauldrons (Shoulders) -->
+  <ellipse cx="21" cy="28" rx="6" ry="5" fill="#6c737d" stroke="#181a1d" stroke-width="1.5"/>
+  <ellipse cx="43" cy="28" rx="6" ry="5" fill="#7c848f" stroke="#181a1d" stroke-width="1.5"/>
+  <!-- Knight Greathelm -->
+  <path d="M22 8 Q32 3 42 8 L43 24 L32 27 L21 24 Z" fill="url(#armor)" stroke="#16181b" stroke-width="1.5"/>
+  <!-- Visor Slit (Glowing Ember Eye slit) -->
+  <path d="M26 15 L41 15 L39 18 L26 17 Z" fill="#121316"/>
+  <line x1="31" y1="16" x2="39" y2="16" stroke="#e07a2b" stroke-width="1.6"/>
+  <!-- Vertical Helm Crest -->
+  <line x1="34" y1="6" x2="34" y2="25" stroke="#8c734b" stroke-width="1.5"/>
+  <!-- Sword held in right hand -->
+  <rect x="42" y="30" width="5" height="16" rx="2" fill="#525861" stroke="#181a1d" stroke-width="1.2"/>
+  <!-- Greatsword Blade -->
+  <path d="M48 42 L51 6 L54 2 L56 6 L54 42 Z" fill="#c7cdd6" stroke="#22262b" stroke-width="1.3"/>
+  <!-- Crossguard -->
+  <rect x="44" y="41" width="14" height="3" rx="1" fill="#9e7f4b" stroke="#1f170d" stroke-width="1"/>
+</svg>

@@ -1,0 +1,339 @@
+[gd_scene format=3 uid="uid://b76e15ste11dm"]
+
+[ext_resource type="Script" path="res://scripts/ui/class_select.gd" id="1_class_select"]
+
+[sub_resource type="Gradient" id="Gradient_embers"]
+offsets = PackedFloat32Array(0, 0.25, 0.7, 1)
+colors = PackedColorArray(1, 0.75, 0.3, 0, 0.95, 0.45, 0.12, 0.85, 0.7, 0.18, 0.05, 0.55, 0.2, 0.05, 0.02, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.05, 0.045, 0.04, 0.95)
+border_width_left = 1
+border_width_top = 2
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.46, 0.36, 0.24, 0.85)
+shadow_color = Color(0, 0, 0, 0.85)
+shadow_size = 24
+content_margin_left = 32.0
+content_margin_top = 26.0
+content_margin_right = 32.0
+content_margin_bottom = 26.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_preview_box"]
+bg_color = Color(0.035, 0.03, 0.03, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.42, 0.32, 0.22, 0.8)
+content_margin_left = 18.0
+content_margin_top = 16.0
+content_margin_right = 18.0
+content_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_bg"]
+bg_color = Color(0.06, 0.05, 0.05, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.38, 0.3, 0.2, 0.8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_fill"]
+bg_color = Color(0.62, 0.14, 0.12, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_stam_fill"]
+bg_color = Color(0.2, 0.48, 0.24, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spd_fill"]
+bg_color = Color(0.68, 0.5, 0.22, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(0.1, 0.08, 0.07, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.48, 0.38, 0.24, 0.9)
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 12.0
+
+[node name="ClassSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_class_select")
+
+[node name="AbyssBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.035, 0.03, 0.03, 1)
+
+[node name="BottomGlow" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -180.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+color = Color(0.22, 0.06, 0.02, 0.18)
+
+[node name="EmberParticles" type="CPUParticles2D" parent="."]
+position = Vector2(576, 660)
+amount = 45
+lifetime = 4.5
+preprocess = 2.0
+emission_shape = 3
+emission_rect_extents = Vector2(600, 20)
+direction = Vector2(0.15, -1)
+spread = 22.0
+gravity = Vector2(8, -28)
+initial_velocity_min = 25.0
+initial_velocity_max = 65.0
+scale_amount_min = 2.0
+scale_amount_max = 4.5
+color_ramp = SubResource("Gradient_embers")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainPanel" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(920, 560)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MainPanel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HeaderLabel" type="Label" parent="CenterContainer/MainPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.86, 0.78, 0.64, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.95)
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 28
+text = "В Ы Б О Р   П Р О И С Х О Ж Д Е Н И Я   ( К Л А С С А )"
+horizontal_alignment = 1
+
+[node name="TopDivider" type="ColorRect" parent="CenterContainer/MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.55, 0.42, 0.25, 0.65)
+
+[node name="ContentHBox" type="HBoxContainer" parent="CenterContainer/MainPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="ClassListGrid" type="GridContainer" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 2
+
+[node name="DetailsPanel" type="PanelContainer" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox"]
+custom_minimum_size = Vector2(390, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_preview_box")
+
+[node name="DetailsVBox" type="VBoxContainer" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SpriteStage" type="Control" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel/DetailsVBox"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="Pedestal" type="ColorRect" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel/DetailsVBox/SpriteStage"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -70.0
+offset_top = -12.0
+offset_right = 70.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.32, 0.24, 0.16, 0.85)
+
+[node name="PreviewSprite" type="Sprite2D" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel/DetailsVBox/SpriteStage"]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(180, 12)
+scale = Vector2(2.0, 2.0)
+
+[node name="ClassTitleLabel" type="Label" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel/DetailsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94, 0.82, 0.55, 1)
+theme_override_font_sizes/font_size = 22
+text = "СТРАЖ ПЕПЛА"
+horizontal_alignment = 1
+
+[node name="ClassSubtitleLabel" type="Label" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel/DetailsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.62, 0.52, 0.42, 1)
+theme_override_font_sizes/font_size = 13
+text = "— Рыцарь старого ордена —"
+horizontal_alignment = 1
+
+[node name="ClassLoreLabel" type="Label" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel/DetailsVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.75, 0.68, 1)
+theme_override_font_sizes/font_size = 13
+text = "Описание класса..."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="StatsGrid" type="GridContainer" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel/DetailsVBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="HpTitle" type="Label" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel/DetailsVBox/StatsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.72, 0.62, 1)
+theme_override_font_sizes/font_size = 13
+text = "Здоровье:"
+
+[node name="StatHpBar" type="ProgressBar" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel/DetailsVBox/StatsGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 14)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hp_fill")
+max_value = 160.0
+value = 140.0
+show_percentage = false
+
+[node name="StatHpValue" type="Label" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel/DetailsVBox/StatsGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.82, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "140"
+
+[node name="StamTitle" type="Label" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel/DetailsVBox/StatsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.72, 0.62, 1)
+theme_override_font_sizes/font_size = 13
+text = "Выносливость:"
+
+[node name="StatStaminaBar" type="ProgressBar" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel/DetailsVBox/StatsGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 14)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_stam_fill")
+max_value = 160.0
+value = 110.0
+show_percentage = false
+
+[node name="StatStaminaValue" type="Label" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel/DetailsVBox/StatsGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.82, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "110"
+
+[node name="SpdTitle" type="Label" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel/DetailsVBox/StatsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.72, 0.62, 1)
+theme_override_font_sizes/font_size = 13
+text = "Скорость:"
+
+[node name="StatSpeedBar" type="ProgressBar" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel/DetailsVBox/StatsGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 14)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_spd_fill")
+min_value = 180.0
+max_value = 300.0
+value = 235.0
+show_percentage = false
+
+[node name="StatSpeedValue" type="Label" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel/DetailsVBox/StatsGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.82, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "235"
+
+[node name="StatSlashLabel" type="Label" parent="CenterContainer/MainPanel/VBoxContainer/ContentHBox/DetailsPanel/DetailsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.72, 0.42, 1)
+theme_override_font_sizes/font_size = 14
+text = "Стихия удара: Золотой рассекатель"
+horizontal_alignment = 1
+
+[node name="BottomDivider" type="ColorRect" parent="CenterContainer/MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.55, 0.42, 0.25, 0.65)
+
+[node name="BottomButtons" type="HBoxContainer" parent="CenterContainer/MainPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="BackButton" type="Button" parent="CenterContainer/MainPanel/VBoxContainer/BottomButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 46)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.8, 0.74, 0.66, 1)
+theme_override_colors/font_hover_color = Color(0.98, 0.86, 0.62, 1)
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn")
+text = "НАЗАД В МЕНЮ"
+
+[node name="StartButton" type="Button" parent="CenterContainer/MainPanel/VBoxContainer/BottomButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 46)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.96, 0.84, 0.56, 1)
+theme_override_colors/font_hover_color = Color(1, 0.92, 0.72, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn")
+text = "НАЧАТЬ ПУТЬ"

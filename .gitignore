@@ -1,0 +1,18 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Экспорты и билды игры
+build/
+export/
+*.exe
+*.pck
+*.apk
+*.aab
+
+# Временные файлы и кэш ОС
+.DS_Store
+Thumbs.db
+*.tmp
+*~
+

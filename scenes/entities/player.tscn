@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7k4x9m2p5v1c"]
+
+[ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_player"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player_knight.svg" id="2_knight_tex"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
+radius = 14.0
+height = 64.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sword"]
+size = Vector2(76, 68)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("1_player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -32)
+shape = SubResource("CapsuleShape2D_body")
+
+[node name="VisualRoot" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -32)
+
+[node name="Sprite2D" type="Sprite2D" parent="VisualRoot"]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(0, -32)
+texture = ExtResource("2_knight_tex")
+
+[node name="SlashSprite" type="Sprite2D" parent="VisualRoot"]
+unique_name_in_owner = true
+visible = false
+z_index = 3
+position = Vector2(46, -10)
+scale = Vector2(0.22, 0.22)
+
+[node name="AttackHitbox" type="Area2D" parent="VisualRoot"]
+unique_name_in_owner = true
+position = Vector2(48, -6)
+collision_layer = 4
+collision_mask = 8
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisualRoot/AttackHitbox"]
+shape = SubResource("RectangleShape2D_sword")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -70)
+limit_left = -450
+limit_top = -600
+limit_right = 3200
+limit_bottom = 260
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+
+[node name="SfxPlayer" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
